@@ -7,13 +7,13 @@
 ozeety-cli stop
 ```
 ```bash
-sudo wget https://github.com/thecoinmakers/ozeety-wallet-v1005/raw/master/Linux/ozeetyd
+sudo wget https://github.com/FLASHMONILTD/GITHUB-OZEETY/raw/master/Linux-Wallet/ozeetyd
 ```
 ```bash
-sudo wget https://github.com/thecoinmakers/ozeety-wallet-v1005/raw/master/Linux/ozeety-tx
+sudo wget https://github.com/FLASHMONILTD/GITHUB-OZEETY/raw/master/Linux-Wallet/ozeety-tx
 ```
 ```bash
-sudo wget https://github.com/thecoinmakers/ozeety-wallet-v1005/raw/master/Linux/ozeety-cli
+sudo wget https://github.com/FLASHMONILTD/GITHUB-OZEETY/raw/master/Linux-Wallet/ozeety-cli
 ```
 Permissions:
 ```bash
@@ -31,7 +31,7 @@ rm -R -f chainstate blocks .log mn.dat budget.dat peers.dat  mncache.dat mnpayme
 ```
 Get chain 
 ```bash
-sudo wget https://www.dropbox.com/s/fgca4r6oj35a0dj/chain-1005-2.zip
+sudo wget https://github.com/FLASHMONILTD/GITHUB-OZEETY/raw/master/chain-1005-2.zip
 ```
 ```bash
 chmod 777 *
