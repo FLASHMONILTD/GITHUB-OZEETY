@@ -8,7 +8,7 @@ sudo mv ozeetyd ozeety-cli ozeety-tx /usr/bin/
    cd .ozeety
   rm -R -f chainstate blocks .log mn.dat budget.dat peers.dat wallet.dat mncache.dat mnpayments.dat fee_estimates.dat db.log debug.log database/ backups/ ozeety.pid .lock
 
-sudo wget https://github.com/FLASHMONILTD/GITHUB-OZEETY/blob/master/chain-1005-2.zip
+sudo wget https://github.com/FLASHMONILTD/GITHUB-OZEETY/raw/master/chain-1005-2.zip
   chmod 777 *
   
   unzip chain_1005.zip
