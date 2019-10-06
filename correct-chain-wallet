@@ -5,6 +5,10 @@ close wallet
 open the main folder of the wallet depends where you saved this:  
 NAME: ozeety
 
+
+standard for MAC OS:
+~/Library/Application Support/ozeety
+
 standard for windows: 
 use cortana: search for %APPDATA% 
 
