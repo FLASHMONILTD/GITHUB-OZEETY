@@ -1,0 +1,22 @@
+#
+correct chain in node / masternode
+ozeety-cli stop
+
+cd .ozeety
+  
+rm -R -f chainstate blocks .log mn.dat budget.dat peers.dat  mncache.dat mnpayments.dat fee_estimates.dat db.log debug.log database/ backups/ ozeety.pid .lock
+
+wget https://www.dropbox.com/s/fgca4r6oj35a0dj/chain-1005-2.zip
+
+unzip chain-1005-2.zip
+ 
+cd
+
+ozeetyd
+
+ozeety-cli getblock "3286d76598f7185a631c99e42350bbe84a6539ce08f524ebe442c9d382cbea01"
+
+ozeety-cli getblockhash 92740
+
+output should be: 
+98ecbabc54aee33a10c09f60cdfd6fe75ddb13f376c30d4d5fbefe091b257141

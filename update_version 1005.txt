@@ -1,0 +1,17 @@
+
+ozeety-cli stop
+ sudo wget https://github.com/thecoinmakers/ozeety-wallet-v1005/raw/master/Linux/ozeetyd
+ sudo wget https://github.com/thecoinmakers/ozeety-wallet-v1005/raw/master/Linux/ozeety-tx
+ sudo wget https://github.com/thecoinmakers/ozeety-wallet-v1005/raw/master/Linux/ozeety-cli
+ chmod 777 *
+sudo mv ozeetyd ozeety-cli ozeety-tx /usr/bin/
+   cd .ozeety
+  rm -R -f chainstate blocks .log mn.dat budget.dat peers.dat wallet.dat mncache.dat mnpayments.dat fee_estimates.dat db.log debug.log database/ backups/ ozeety.pid .lock
+
+sudo wget https://github.com/thecoinmakers/ozeety-chain/raw/master/chain_1005.zip
+  chmod 777 *
+  
+  unzip chain_1005.zip
+  chmod 777 *
+  cd
+  ozeetyd 

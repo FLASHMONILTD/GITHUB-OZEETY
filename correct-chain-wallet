@@ -1,0 +1,29 @@
+#updating wallet to the correct chain: 
+save the wallet.dat file and the masternode.conf 
+close wallet
+
+open the main folder of the wallet depends where you saved this:  
+NAME: ozeety
+
+standard for windows: 
+use cortana: search for %APPDATA% 
+
+you will find a folder: Roaming 
+
+there you will find the ozeety folder
+
+delete the following folder: 
+blocks, chainstate, zerocoin, sporks
+
+delete the following files: 
+banlist, peers
+
+download the correct chain from here: 
+https://www.dropbox.com/s/fgca4r6oj35a0dj/chain-1005-2.zip
+
+extract these into the ozeety folder
+
+restart the wallet 
+and wait until it is sync. 
+
+Check again with the getblockhash 92740
