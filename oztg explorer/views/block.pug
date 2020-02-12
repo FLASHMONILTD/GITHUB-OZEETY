@@ -1,0 +1,101 @@
+extends layout
+
+block content
+  - var time = format_unixtime(block.time)
+  .col-xs-12.col-md-10.col-md-offset-1
+    .well.well-sm.hidden-lg.hidden-md(style='word-wrap:break-word;')
+      | #{block.hash}
+    .panel.panel-default
+      .panel-heading(style='padding-left:25px;padding-right:25px;')       
+        .row           
+          if block.previousblockhash != null
+            a(href='/block/' + block.previousblockhash)
+              span.glyphicon.glyphicon-chevron-left.iquidus.block-last(data-toggle='tooltip', data-placement='top', title= t('block.block_previous'))  
+            strong.hidden-xs= t('block.coin_block_hash',{coin : settings.symbol,hash : block.hash})
+          else
+            strong.hidden-xs(style='margin-left:10px;')= t('block.coin_block_hash',{coin : settings.symbol,hash : block.hash})
+          if block.nextblockhash != null 
+            a(href='/block/' + block.nextblockhash)
+              span.glyphicon.glyphicon-chevron-right.iquidus.pull-right.block-next(data-toggle='tooltip', data-placement='top', title= t('block.block_next'))       
+          a(href='/api/getblock?hash=' + block.hash)
+            span.glyphicon.glyphicon-info-sign.iquidus.pull-right(data-toggle='tooltip', data-placement='top', title= t('block.tooltip_raw_block_transaction')) 
+      table.table.table-bordered.summary-table 
+        thead
+          tr
+            th= t('block.height')
+            th= t('block.difficulty')
+            th= t('block.confirmations')
+            if settings.heavy == true
+              th= t('block.vote')
+            th.hidden-xs= t('block.size_kb')
+            th.hidden-xs= t('block.bits')
+            th.hidden-xs= t('block.nonce')
+            th.hidden-xs= t('block.timestamp')     
+        tbody
+          if block.confirmations >= confirmations                
+            tr.success
+              - var block_size = block.size/1024
+              td #{block.height}
+              td #{block.difficulty.toFixed(4)}
+              td #{block.confirmations}
+              if settings.heavy == true
+                td  #{block.vote}
+              td.hidden-xs #{block_size.toFixed(2)}
+              td.hidden-xs #{block.bits}
+              td.hidden-xs #{block.nonce}
+              td.hidden-xs #{time}
+          else
+            if block.confirmations < (confirmations / 2)
+              tr.danger
+                - var block_size = block.size/1024
+                td #{block.height}
+                td #{block.difficulty.toFixed(4)}
+                td #{block.confirmations}
+                if settings.heavy == true
+                  td  #{block.vote}
+                td.hidden-xs #{block_size.toFixed(2)}
+                td.hidden-xs #{block.bits}
+                td.hidden-xs #{block.nonce}
+                td.hidden-xs #{time}
+            else
+              tr.warning
+                - var block_size = block.size/1024
+                td #{block.height}
+                td #{block.difficulty.toFixed(4)}
+                td #{block.confirmations}
+                if settings.heavy == true
+                  td  #{block.vote}
+                td.hidden-xs #{block_size.toFixed(2)}
+                td.hidden-xs #{block.bits}
+                td.hidden-xs #{block.nonce}
+                td.hidden-xs #{time}
+
+    if block.hash == settings.genesis_block
+      .alert.alert-info(role='alert', style='text-align:center;')   
+        strong= t('block.block_genesis')
+    else
+      .panel.panel-default
+        .panel-heading
+          strong= t('block.latest_transactions')
+        table.table.table-bordered.table-striped.summary-table 
+          thead
+            tr
+              th.hidden-xs= t('block.hash')
+              th= t('block.recipients_address')
+              th= t('block.amount_coin',{coin : settings.symbol})
+              th
+          tbody
+            each txn in txs
+              tr
+                td.hidden-xs
+                  a(href='/tx/' + txn.txid) #{txn.txid}
+                td #{txn.vout.length}
+                if txn.vout.length > 0
+                  - var total = txn.total / 100000000
+                  td #{total.toFixed(8)}
+                else
+                  td #{txn.total.toFixed(8)}
+                td.view_tx 
+                  a(href='/tx/' + txn.txid)
+                    span.glyphicon.glyphicon-eye-open(data-toggle='tooltip', data-placement='top', title= t('block.tooltip_get_tx'))  
+    .footer-padding  

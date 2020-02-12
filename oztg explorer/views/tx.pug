@@ -1,0 +1,114 @@
+extends layout
+
+block content
+  - var time = format_unixtime(tx.timestamp)
+    .col-xs-12.col-md-10.col-md-offset-1
+      .well.well-sm.hidden-lg.hidden-md(style='word-wrap:break-word;')
+        | #{tx.txid}
+      .panel.panel-default
+        .panel-heading.hidden-xs      
+          strong= t('tx.txid_header',{coin : settings.symbol , txid : tx.txid})
+          a(href='/api/getrawtransaction?txid=' + tx.txid + '&decrypt=1')
+            span.glyphicon.glyphicon-info-sign.iquidus.pull-right(data-toggle='tooltip', data-placement='top', title= t('tx.tooltip_raw_tx_transaction')) 
+        table.table.table-bordered.table-striped.summary-table 
+          thead
+            tr
+              th= t('tx.confirmations')
+              th.hidden-xs= t('tx.block_hash')
+              th= t('tx.timestamp')
+              th
+          tbody
+            - var confirms = (blockcount - tx.blockindex);
+            if confirms >= confirmations                
+              tr.success
+                  td #{confirms}
+                  td.hidden-xs 
+                    a(href='/block/' + tx.blockhash) #{tx.blockhash}
+                  td #{time}
+                  td.view_tx  
+                    a(href='/block/' + tx.blockhash)
+                      span.glyphicon.glyphicon-eye-open(data-toggle='tooltip', data-placement='top', title= t('tx.tooltip_get_block')) 
+            else
+              if confirms < (confirmations / 2)
+                tr.danger
+                  td #{confirms}
+                  td.hidden-xs  
+                    a(href='/block/' + tx.blockhash) #{tx.blockhash}
+                  td #{time}
+                  td.view_tx  
+                    a(href='/block/' + tx.blockhash)
+                      span.glyphicon.glyphicon-eye-open(data-toggle='tooltip', data-placement='top', title= t('tx.tooltip_get_block'))  
+              else
+                tr.warning
+                  td #{confirms}
+                  td.hidden-xs  
+                    a(href='/block/' + tx.blockhash) #{tx.blockhash}
+                  td #{time}
+                  td.view_tx  
+                    a(href='/block/' + tx.blockhash)
+                      span.glyphicon.glyphicon-eye-open(data-toggle='tooltip', data-placement='top', title= t('tx.tooltip_get_block')) 
+      if tx.vout.length < 1
+        .alert.alert-info(role='alert', style='text-align:center;')   
+          strong= t('tx.tx_nonstandard')
+      else
+        .row
+          .col-md-6
+            .panel.panel-default
+              .panel-heading
+                strong= t('tx.input_adress')
+                a(href='/block/' + tx.blockhash)
+                  span.glyphicon.glyphicon-arrow-right.pull-right.hidden-xs(data-toggle='tooltip', data-placement='top', title= t('tx.tooltip_get_block')) 
+              table.table.table-bordered.table-striped.summary-table 
+                thead
+                  tr
+                    th= t('tx.address')
+                    if (tx.vin.length > 0)
+                      if tx.vin[0].addresses != 'coinbase'
+                        th.hidden-xs= t('tx.amount_coin',{coin : settings.symbol})
+                tbody
+                  if tx.vin.length > 0
+                    each r in tx.vin
+                      if r.addresses == 'coinbase' 
+                        tr.info(style='text-align:center')
+                          td= t('tx.new_coins')
+                      else
+                        - var ramount = r.amount / 100000000
+                        tr
+                          td 
+                            a.loading(href='/address/' + r.addresses) 
+                              =r.addresses
+                          td.danger.hidden-xs #{ramount.toFixed(8)}
+                        tr.hidden-lg.hidden-md
+                            td.danger= t('tx.coin_transfer',{amount:ramount.toFixed(8),coin:settings.symbol})
+                  else
+                    tr.info(style='text-align:center')
+                      td= t('tx.proof_of_stake')
+          .col-md-6
+            .panel.panel-default
+              .panel-heading
+                strong= t('tx.recipients_address')
+              table.table.table-bordered.table-striped.summary-table 
+                thead
+                  tr
+                    th= t('tx.address')
+                    th.hidden-xs= t('tx.amount_coin',{coin : settings.symbol})
+                tbody
+                  each r in tx.vout
+                    if tx.vout.length > 0 
+                      - var ramount = r.amount / 100000000  
+                      tr
+                        td 
+                          a.loading(href='/address/' + r.addresses) 
+                            =r.addresses 
+                        td.success.hidden-xs  #{ramount.toFixed(8)}
+                      tr.hidden-lg.hidden-md
+                        td.success= t('tx.coin_transfer',{amount:ramount.toFixed(8),coin:settings.symbol})
+                    else
+                      tr
+                        td 
+                          a.loading(href='/address/' + r.addresses) 
+                            =r.addresses 
+                        td.success.hidden-xs  #{ramount.toFixed(8)}
+                      tr.hidden-lg.hidden-md
+                        td.success= t('tx.coin_transfer',{amount:ramount.toFixed(8),coin:settings.symbol})
+      .footer-padding

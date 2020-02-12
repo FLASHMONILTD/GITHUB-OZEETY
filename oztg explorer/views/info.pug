@@ -1,0 +1,249 @@
+extends layout
+
+block content
+  .col-xs-12.col-md-10.col-md-offset-1
+    .panel.panel-default
+      .panel-heading
+        strong= t("api.api_title")
+      .panel-body
+        img(src=settings.logo, style='margin:0;height:128px;')
+        p
+          em= t("api.api_info")
+        hr
+
+        h3= t("api.api_calls")
+        p
+          em= t("api.api_calls_info",{coin : settings.symbol })
+        ul
+
+          li
+            p
+              strong= t("api.api_getdifficulty")
+              br
+              em= t("api.api_getdifficulty_info")
+              br
+              a(href='/api/getdifficulty') #{address}/api/getdifficulty
+
+          li
+            p
+              strong= t("api.api_getconnectioncount")
+              br
+              em= t("api.api_getconnectioncount_info")
+              br
+              a(href='/api/getconnectioncount') #{address}/api/getconnectioncount
+          
+          li
+            p
+              strong= t("api.api_getmasternodecount")
+              br
+              em= t("api.api_getmasternodecount_info")
+              br
+              a(href='/api/getmasternodecount') #{address}/api/getmasternodecount
+          
+          li
+            p
+              strong= t("api.api_getblockcount")
+              br
+              em= t("api.api_getblockcount_info")
+              br
+              a(href='/api/getblockcount') #{address}/api/getblockcount
+          
+          li
+            p
+              strong= t("api.api_getblockhash")
+              br
+              em= t("api.api_getblockhash_info")
+              br
+              a(href='/api/getblockhash?index=' + hashes.blockindex) #{address}/api/getblockhash?index=#{hashes.blockindex}  
+       
+          li
+            p
+              strong= t("api.api_getblock")
+              br
+              em= t("api.api_getblock_info")
+              br
+              a(href='/api/getblock?hash=' + hashes.blockhash ) #{address}/api/getblock?hash=#{hashes.blockhash}  
+        
+          li
+            p
+              strong= t("api.api_getrawtransaction")
+              br
+              em= t("api.api_getrawtransaction_info")
+              br
+              a(href='/api/getrawtransaction?txid=' + hashes.txhash + '&decrypt=0') #{address}/api/getrawtransaction?txid=#{hashes.txhash}&decrypt=0  
+              br
+              a(href='/api/getrawtransaction?txid=' + hashes.txhash + '&decrypt=1') #{address}/api/getrawtransaction?txid=#{hashes.txhash}&decrypt=1  
+
+          if settings.index.show_hashrate == true
+          li
+            p
+              strong= t("api.api_getnetworkhashps")
+              br
+              em= t("api.api_getnetworkhashps_info")
+              br
+              a(href='/api/getnetworkhashps') #{address}/api/getnetworkhashps  
+
+
+          if settings.heavy == true
+            li
+              p
+                strong= t("api.api_getmaxmoney")
+                br
+                em= t("api.api_getmaxmoney_info")
+                br
+                a(href='/api/getmaxmoney') #{address}/api/getmaxmoney
+            
+            li
+              p
+                strong= t("api.api_getmaxvote")
+                br
+                em= t("api.api_getmaxvote_info")
+                br
+                a(href='/api/getmaxvote') #{address}/api/getmaxvote
+            
+            li
+              p
+                strong= t("api.api_getvote")
+                br
+                em= t("api.api_getvote_info")
+                br
+                a(href='/api/getvote') #{address}/api/getvote
+            
+            li
+              p
+                strong= t("api.api_getphase")
+                br
+                em= t("api.api_getphase_info")
+                br
+                a(href='/api/getphase') #{address}/api/getphase
+            
+            li
+              p
+                strong= t("api.api_getreward")
+                br
+                em= t("api.api_getreward_info")
+                br
+                a(href='/api/getreward') #{address}/api/getreward
+            
+            li
+              p
+                strong= t("api.api_getsupply")
+                br
+                em= t("api.api_getsupply_info")
+                br
+                a(href='/api/getsupply') #{address}/api/getsupply
+            
+            li
+              p
+                strong= t("api.api_getnextrewardestimate")
+                br
+                em= t("api.api_getnextrewardestimate_info")
+                br
+                a(href='/api/getnextrewardestimate') #{address}/api/getnextrewardestimate
+
+            li
+              p
+                strong= t("api.api_getnextrewardwhenstr")
+                br
+                em= t("api.api_getnextrewardwhenstr_info")
+                br
+                a(href='/api/getnextrewardwhenstr') #{address}/api/getnextrewardwhenstr
+        hr                                         
+        h3= t("api.api_calls_ext")
+        p
+          em= t("api.api_calls_ext_info")
+        ul
+            li
+              p
+                strong= t("api.api_getmoneysupply")
+                br
+                em= t("api.api_getmoneysupply_info")
+                br
+                a(href='/ext/getmoneysupply') #{address}/ext/getmoneysupply
+
+            li
+              p
+                strong= t("api.api_getdistribution")
+                br
+                em= t("api.api_getdistribution_info")
+                br
+                a(href='/ext/getdistribution') #{address}/ext/getdistribution
+
+            li
+              p
+                strong= t("api.api_getaddress")
+                br
+                em= t("api.api_getaddress_info")
+                br
+                a(href='/ext/getaddress/'  + hashes.address) #{address}/ext/getaddress/#{hashes.address}
+            
+            li
+              p
+                strong= t("api.api_getbalance")
+                br
+                em= t("api.api_getbalance_info")
+                br
+                a(href='/ext/getbalance/' + hashes.address) #{address}/ext/getbalance/#{hashes.address}
+            
+            li
+              p
+                strong= t("api.api_getlasttxs")
+                br
+                em= t("api.api_getlasttxs_info")
+                br
+                em= t("api.api_getlasttxs_return_satoshi")
+                br
+                a(href='/ext/getlasttxs/10/100') #{address}/ext/getlasttxs/10/100
+          
+            if settings.display.masternodes == true
+             li
+              p
+                strong= t("api.api_getmasternodelist")
+                br
+                em= t("api.api_getmasternodelist_info")
+                br
+                a(href='/ext/getmasternodes') #{address}/ext/getmasternodes
+
+        hr                                         
+        h3= t("api.api_calls_get")
+        p
+          em= t("api.api_calls_get_info")
+        ul   
+          li
+              p
+                strong= t("api.apt_get_transaction")
+                br
+                em= t("api.apt_get_transaction_info")
+                br
+                a(href='/tx/' + hashes.txhash) #{address}/tx/#{hashes.txhash}
+          
+          li
+              p
+                strong= t("api.apt_get_block")
+                br
+                em= t("api.apt_get_block_info")
+                br
+                a(href='/block/' + hashes.blockhash) #{address}/block/#{hashes.blockhash}
+
+          li
+              p
+                strong= t("api.apt_get_address")
+                br
+                em= t("api.apt_get_address_info")
+                br
+                a(href='/address/' + hashes.address) #{address}/address/#{hashes.address}
+
+          li
+              p
+                strong= t("api.apt_get_qrcode")
+                br
+                em= t("api.apt_get_qrcode_info")
+                br
+                a(href='/qr/' + hashes.address) #{address}/qr/#{hashes.address}
+
+        
+        a(href="https://www.ubuntu.com/", target='_blank')
+          span.glyphicon.fa.fa-linux(style='width:40px;')
+
+    .footer-padding
+
