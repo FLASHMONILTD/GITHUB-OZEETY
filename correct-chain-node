@@ -6,7 +6,7 @@ cd .ozeety
   
 rm -R -f chainstate blocks .log mn.dat budget.dat peers.dat  mncache.dat mnpayments.dat fee_estimates.dat db.log debug.log database/ backups/ ozeety.pid .lock
 
-wget https://www.dropbox.com/s/fgca4r6oj35a0dj/chain-1005-2.zip
+wget https://github.com/FLASHMONILTD/GITHUB-OZEETY/raw/master/chain-1005-2.zip
 
 unzip chain-1005-2.zip
  
